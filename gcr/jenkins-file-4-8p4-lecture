@@ -1,0 +1,45 @@
+pipeline {
+
+   agent any
+   
+   stages {
+    
+	  stage('Run gcloud version') {
+	    steps {
+		    
+		   sh 'gcloud --version'
+		   sh 'pwd'
+		   sh 'gcloud auth list'
+	    }
+	  }
+	 
+	  stage ('Authentication') {
+	    steps {
+		    sh 'gcloud auth activate-service-account junaidgcp@custom-healer-422309-u4.iam.gserviceaccount.com --key-file=jenkins.json'
+	    }
+      }
+	 
+			
+	  stage ('compute VM create') {
+	    steps {
+		    sh 'gcloud compute instances create hello1   --zone=us-central1-a'
+			
+		}
+      }
+
+	 stage ('list VM instances') {
+	    steps {
+		    sh 'gcloud compute instances list'
+		}
+      }		
+	 
+	 stage ('Delete VM') {
+	    steps {
+		    sh 'sleep 60'
+		    sh 'gcloud compute instances delete hello1 --zone=us-central1-a'
+			 
+			}
+		}
+      }
+}	 
+     
