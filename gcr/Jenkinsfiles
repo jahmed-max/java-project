@@ -2,7 +2,7 @@ pipeline {
     agent any
     tools
     {
-       maven "Maven 3.6.2"
+       maven "maven 3.6.3"
     }
 
     environment {
@@ -12,7 +12,7 @@ pipeline {
     stages {
         stage ('checkout'){
             steps {
-                git branch: 'master', url: 'https://github.com/jahmed-wq/jar.git'
+                git branch: 'master', url: 'https://github.com/jahmed-max/java-project.git'
             }
         }
       
@@ -37,7 +37,7 @@ pipeline {
 	 steps {
         /* Below command specifies exactly like the command line */
     
-        sh 'docker build -t gcr.io/leafy-trainer-359815/javaapp2 .'
+        sh 'docker build -t gcr.io/canvas-modem-457011-p6/javaapp2 .'
     }
     }
         
@@ -46,9 +46,9 @@ pipeline {
 			  dir('gcr')
 			 {
 			 sh 'pwd'
-        sh 'gcloud auth activate-service-account jenkins@mihappens.iam.gserviceaccount.com --key-file=jenkins.json'
+        sh 'gcloud auth activate-service-account harsha@canvas-modem-457011-p6.iam.gserviceaccount.com --key-file=jenkins.json'
 	sh 'gcloud auth configure-docker'
-        sh 'docker push gcr.io/leafy-trainer-359815/javaapp2'
+        sh 'docker push gcr.io/canvas-modem-457011-p6/javaapp2'
 			 }
 		 }
 	 }
@@ -57,14 +57,14 @@ pipeline {
 	stage('Create GKE cluster') {
 	 steps {
     
-        sh 'gcloud container clusters create samples-cluster --zone us-central1-a --num-nodes=1 --project leafy-trainer-359815'
+        sh 'gcloud container clusters create samples-cluster --zone us-central1-a --num-nodes=1 --project canvas-modem-457011-p6'
     }
     }
     
     stage('Get creds from GKE cluster') {
 	 steps {
     
-        sh 'gcloud container clusters get-credentials samples-cluster --zone us-central1-a --project leafy-trainer-359815'
+        sh 'gcloud container clusters get-credentials samples-cluster --zone us-central1-a --project canvas-modem-457011-p6'
     }
     }
     
@@ -84,7 +84,7 @@ pipeline {
     stage('App health check') {
 	 steps {
     
-        sh 'curl http://35.239.236.131:8080/health'
+        sh 'curl http://34.44.124.87:8080/health'
 	
     
     }
