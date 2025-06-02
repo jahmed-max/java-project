@@ -5,7 +5,7 @@ metadata:
   name: my-lb-service
 spec:
   type: LoadBalancer
-  loadBalancerIP: 35.239.236.131
+  loadBalancerIP: 34.44.124.87
   selector:
     app: javaapp
   ports:
@@ -30,6 +30,6 @@ spec:
     spec:
       containers:
       - name: java01
-        image: gcr.io/leafy-trainer-359815/javaapp2:latest
+        image: gcr.io/canvas-modem-457011-p6/javaapp2:latest
         ports:
         - containerPort: 8080
