@@ -5,7 +5,7 @@ pipeline {
     stage('Get creds from GKE cluster') {
 	 steps {
     
-        sh 'gcloud container clusters get-credentials samples-cluster --zone us-central1-a --project leafy-trainer-359815'
+        sh 'gcloud container clusters get-credentials samples-cluster --zone us-central1-a --project canvas-modem-457011-p6'
     }
     }
     
@@ -39,7 +39,7 @@ pipeline {
     stage('Test App') {
 	 steps {
     
-        sh 'curl http://35.239.236.131:8080/health'
+        sh 'curl http://34.44.124.87:8080/health'
 	
     }
     
